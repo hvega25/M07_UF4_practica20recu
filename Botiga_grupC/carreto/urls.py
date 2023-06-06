@@ -4,5 +4,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('listar/', views.listar, name='listar-carreto')
+    path('listar/', views.listar, name='listar-carreto'),
+    path('agregar/', views.agregar_carrito, name='add-carreto'),
 ]

@@ -19,3 +19,15 @@ def listar(request):
     '''
     serializer = carretoSerializer(listar_todo, many=True)
     return Response(serializer.data)
+
+
+@api_view(['GET', 'POST'])
+def agregar_carrito(request):
+    data  = request.data
+    serializer = carretoSerializer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({"Con exito" : "Fue agregado con exito"})
+    else:
+        return Response(serializer.errors , status=400)
+    
