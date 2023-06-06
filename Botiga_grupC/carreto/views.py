@@ -42,3 +42,11 @@ def eliminar_un_producto(request):
         return Response({"Con exito" : "El producto fue eliminado con exito"} ,status=200)
     except CarritoCompra.DoesNotExist:
         return Response({"ERROR" : "El producto no existe"} ,status=404)
+    
+#método delete un elemento
+@api_view(['DELETE'])
+def eliminar_todo(request):
+    carr  = CarritoCompra.objects.all()
+    carr.delete()
+    return Response({"Con exito" : "El carrito fue eliminado con exito"} ,status=200)
+    
