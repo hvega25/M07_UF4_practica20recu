@@ -20,7 +20,7 @@ def listar(request):
     serializer = carretoSerializer(listar_todo, many=True)
     return Response(serializer.data)
 
-
+#metodo para crear nuevo elemento
 @api_view(['GET', 'POST'])
 def agregar_carrito(request):
     data  = request.data
