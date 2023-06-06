@@ -10,6 +10,7 @@ from .models import CarritoCompra
 #importación de el serializers
 from .serializers import carretoSerializer
 
+#lista los elementos de la tabla
 @api_view(['GET'])
 def listar(request):
     listar_todo = CarritoCompra.objects.all()
@@ -27,7 +28,17 @@ def agregar_carrito(request):
     serializer = carretoSerializer(data=data)
     if serializer.is_valid():
         serializer.save()
-        return Response({"Con exito" : "Fue agregado con exito"})
+        return Response({"Con exito" : "Fue agregado con exito"}, status=200)
     else:
         return Response(serializer.errors , status=400)
     
+#método delete un elemento
+@api_view(['DELETE'])
+def eliminar_un_producto(request):
+    prod_id  = request.data.get('id')
+    try:
+        carr = CarritoCompra.objects.get(id = prod_id)
+        carr.delete()
+        return Response({"Con exito" : "El producto fue eliminado con exito"} ,status=200)
+    except CarritoCompra.DoesNotExist:
+        return Response({"ERROR" : "El producto no existe"} ,status=404)
