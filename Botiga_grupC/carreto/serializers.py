@@ -14,5 +14,7 @@ class carretoSerializer(ModelSerializer):
     class Meta:
         model = CarritoCompra
         fields = '__all__'
+    
+
 
    

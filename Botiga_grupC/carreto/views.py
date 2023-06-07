@@ -35,7 +35,7 @@ def agregar_carrito(request):
 #método delete un elemento
 @api_view(['DELETE'])
 def eliminar_un_producto(request):
-    prod_id  = request.data.get('id')
+    prod_id = request.query_params.get('id')
     try:
         carr = CarritoCompra.objects.get(id = prod_id)
         carr.delete()
@@ -43,10 +43,40 @@ def eliminar_un_producto(request):
     except CarritoCompra.DoesNotExist:
         return Response({"ERROR" : "El producto no existe"} ,status=404)
     
-#método delete un elemento
+#método delete todo el carrito
 @api_view(['DELETE'])
 def eliminar_todo(request):
     carr  = CarritoCompra.objects.all()
     carr.delete()
     return Response({"Con exito" : "El carrito fue eliminado con exito"} ,status=200)
     
+
+#método para obtener un articulo y despúes esto se envia al siguiente metodo para editarlo
+@api_view(['GET'])
+def obtener_articulo (request):
+    prod_id = request.data.get('id')
+    try:
+        carr = CarritoCompra.objects.get(id = prod_id)
+        serializer = carretoSerializer(carr)
+        return Response(serializer.data)
+    except CarritoCompra.DoesNotExist:
+        return Response({"ERROR" : "El producto no existe"} )
+    
+#metodo para editar un articulo
+@api_view(['PUT'])
+def UpdateArticulo(request):
+    post_id = request.data.get('id')
+    nueva_cantidad = request.data.get('actualizar_cantidad')
+
+    try:
+        actualizado = CarritoCompra.objects.get(id=post_id)
+
+        if nueva_cantidad:
+            actualizado.cantidad = nueva_cantidad
+            actualizado.save()
+            return Response({"Con exito": "El articulo fue actualizado con exito"}, status=200)
+
+        
+
+    except CarritoCompra.DoesNotExist:
+        return Response({"Error": "No existe"})
