@@ -6,5 +6,6 @@ from . import views
 
 urlpatterns = [
     #ruta para listar 
-    path('listar/', views.listar, name='listar-comanda'),
+    path('completados/', views.completados, name='completados'),
+    path('sin-completar/', views.sin_completar, name='sinCompletar'),
 ]
