@@ -86,6 +86,8 @@ WSGI_APPLICATION = 'Botiga_grupC.wsgi.application'
 DATABASES = {
    'default': {
         'ENGINE': 'django.db.backends.mysql',
+        #Herson: esta base de datos es de pruebas para hacer la relación de tablas
+        #'NAME': 'botiga_grupC_dev',
         'NAME': 'botiga_grupC',
         'USER': 'root',
         'PASSWORD': '',
