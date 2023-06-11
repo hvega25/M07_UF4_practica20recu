@@ -2,12 +2,13 @@ from django.db import models
 
 
 class CarritoCompra(models.Model):
-    #producto = models.ForeignKey(Catalogo, on_delete=models.CASCADE)
-    cantidad = models.PositiveIntegerField()
-    metodo_envio = models.CharField(max_length=100)
-
+     cantidad = models.PositiveIntegerField()
+     metodo_envio = models.CharField(max_length=100)
    
-    #Función para calcular el subtotal 
-    ''' def subtotal(self):
-        return self.producto.precio * self.cantidad
-    '''
+
+     def __str__(self):
+        campos = []
+        for field in self._meta.fields:
+            field_value = getattr(self, field.name)
+            campos.append(f"{field.name}: {field_value}")
+        return ', '.join(campos)

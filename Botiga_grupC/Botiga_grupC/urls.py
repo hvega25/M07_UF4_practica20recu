@@ -20,5 +20,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('carreto/', include('carreto.urls'), name='carreto' )
+    #ruta para aplicación carreto
+    path('carreto/', include('carreto.urls'), name='carreto' ),
+    #ruta para la aplicacion comanda
+    path('comandes/', include('comandes.urls'), name='comanda' )
 ]

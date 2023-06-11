@@ -3,6 +3,7 @@ from django.urls import path
 #importación de la views de la app
 from . import views
 
+
 urlpatterns = [
     #ruta para listar 
     path('listar/', views.listar, name='listar-carreto'),
@@ -15,4 +16,5 @@ urlpatterns = [
     #ruta para obtener el elemento a editar
     path('editar/' , views.obtener_articulo, name='obtener'),
     path('update-articulo/' , views.UpdateArticulo, name='update-art'),
+   
 ]

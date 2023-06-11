@@ -4,11 +4,14 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+
 #importación de model de la app
 from .models import CarritoCompra
 
 #importación de el serializers
 from .serializers import carretoSerializer
+
+
 
 #lista los elementos de la tabla
 @api_view(['GET'])
@@ -80,3 +83,4 @@ def UpdateArticulo(request):
 
     except CarritoCompra.DoesNotExist:
         return Response({"Error": "No existe"})
+    
