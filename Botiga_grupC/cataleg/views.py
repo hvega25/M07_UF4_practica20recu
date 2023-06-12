@@ -41,3 +41,12 @@ def delete_product(request, pk):
         return Response({'error':'Producto no encontrado'}, status=404)
     product.delete()
     return Response(status=204)
+
+@api_view(['GET'])
+def view_product(request,pk):
+    try:
+        product = Producto.objects.get(pk=pk)
+    except Producto.DoesNotExist:
+        return Response({'error':'Producto no encontrado'}, status=404)
+    serializer = ProductoSerializer(product)
+    return Response(serializer.data)
