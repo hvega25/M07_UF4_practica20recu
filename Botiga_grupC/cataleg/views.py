@@ -32,3 +32,12 @@ def update_product(request, pk):
     elif request.method == 'GET':
         serializer = ProductoSerializer(product)
         return Response(serializer.data)
+
+@api_view(['DELETE'])
+def delete_product(request, pk):
+    try:
+        product = Producto.objects.get(pk=pk)
+    except Producto.DoesNotExist:
+        return Response({'error':'Producto no encontrado'}, status=404)
+    product.delete()
+    return Response(status=204)
